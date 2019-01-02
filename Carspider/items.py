@@ -19,6 +19,18 @@ class CarspiderItem(scrapy.Item):
     car_urls = scrapy.Field()
 
 
+class CarprojectItem(scrapy.Item):
+
+    car_url = scrapy.Field()
+    car_title = scrapy.Field()
+    car_details = scrapy.Field()
+    car_address = scrapy.Field()
+    car_basic = scrapy.Field()
+    car_describe = scrapy.Field()
+    car_score = scrapy.Field()
+    car_pic = scrapy.Field()
+
+
 
 class Img699PicItem(scrapy.Item):
     # 分类的标题

@@ -19,8 +19,8 @@ class A699picSpider(scrapy.Spider):
             category = div.xpath("./a[@class='special-list-title']//text()").get().strip()
             url = div.xpath("./a[@class='special-list-title']/@href").get().strip()
             image_urls = self.parse_url(url)
-            # item = Img699PicItem(category=category, image_urls=image_urls)
-            # yield item
+            item = Img699PicItem(category=category, image_urls=image_urls)
+            yield item
 
     def parse_url(self, url):
         response = requests.get(url=url, headers=self.headers)
@@ -28,4 +28,4 @@ class A699picSpider(scrapy.Spider):
         image_urls = htmlElement.xpath("//div[@class='imgshow clearfix']//div[@class='list']/a/img/@src")
 
         print(type(image_urls),image_urls)
-        # return image_urls
+        return image_urls
