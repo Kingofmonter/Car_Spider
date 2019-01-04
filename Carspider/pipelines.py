@@ -6,6 +6,10 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymysql
+from scrapy.pipelines.images import ImagesPipeline
+from scrapy.exceptions import DropItem
+from scrapy import Request
+from urllib import parse
 
 class CarspiderPipeline(object):
 
@@ -30,8 +34,25 @@ class CarspiderPipeline(object):
         print('爬虫结束')
 
 
-class CarProjectPipeline(object):
+class CarImgPipeline(ImagesPipeline):
 
+
+    def get_media_requests(self, item, info):
+
+        for img_url in item['car_img']:
+            yield Request(parse.urljoin('https:',img_url))
+
+    def item_completed(self, results, item, info):
+        img_path = [x['img_path'] for ok,x in results if ok]
+        if not img_path:
+            raise DropItem('no Image')
+
+        item['img_path'] = img_path
+        return item
+
+
+
+class CarProjectPipeline(object):
 
     def __init__(self):
 

@@ -9,6 +9,8 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
+import os
+
 BOT_NAME = 'Carspider'
 
 SPIDER_MODULES = ['Carspider.spiders']
@@ -65,8 +67,9 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'Carspider.pipelines.CarspiderPipeline': 1,
+   # 'Carspider.pipelines.CarspiderPipeline': 1,
    # 'Carspider.pipelines.CarProjectPipeline':2
+   'Carspider.pipelines.CarImgPipeline':1
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,3 +92,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+IMAGES_STORE=os.path.join(os.path.dirname(os.path.dirname(__file__)),'images')

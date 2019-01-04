@@ -1,5 +1,5 @@
 import scrapy
-import requests
+import requests,time
 from scrapy import Request
 from urllib import parse
 from ..items import CarspiderItem,CarprojectItem
@@ -9,7 +9,6 @@ class CarSpider(scrapy.Spider):
     name = 'car'
     allowed_domains = ['https://www.che168.com/wenzhou/']
     start_urls = ['https://www.che168.com/china/a0_0msdgscncgpi1ltocsp1exx0/']
-    i = 1
 
     def parse(self, response):
 
@@ -33,10 +32,11 @@ class CarSpider(scrapy.Spider):
         yield item
 
         for car_url in car_urls:
-
+            time.sleep(3)
             yield Request(url=parse.urljoin('https://www.che168.com',car_url),callback=self.detail_parse,dont_filter=True)
 
         if next_url:
+            time.sleep(5)
             yield Request(url=parse.urljoin('https://www.che168.com', next_url), callback=self.parse, dont_filter=True)
         else:
             print('爬完了  ')

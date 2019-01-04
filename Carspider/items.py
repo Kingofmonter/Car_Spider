@@ -17,6 +17,7 @@ class CarspiderItem(scrapy.Item):
     original_price = scrapy.Field()
     car_img = scrapy.Field()
     car_urls = scrapy.Field()
+    img_path = scrapy.Field()
 
 
 class CarprojectItem(scrapy.Item):
