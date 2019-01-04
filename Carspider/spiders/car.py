@@ -26,10 +26,10 @@ class CarSpider(scrapy.Spider):
             car_url = 'https://www.che168.com'+car_url
             urls.append(car_url)
 
-
-        item = CarspiderItem(car_name=car_name,car_state=car_state,now_price=now_price,original_price=original_price,car_img=car_img,car_urls=urls)
-
-        yield item
+        #
+        # item = CarspiderItem(car_name=car_name,car_state=car_state,now_price=now_price,original_price=original_price,car_img=car_img,car_urls=urls)
+        #
+        # yield item
 
         for car_url in car_urls:
             time.sleep(3)
@@ -38,22 +38,24 @@ class CarSpider(scrapy.Spider):
         if next_url:
             time.sleep(5)
             yield Request(url=parse.urljoin('https://www.che168.com', next_url), callback=self.parse, dont_filter=True)
-        else:
-            print('爬完了  ')
+
+        elif next_url == 'https://www.che168.com/china/a0_0msdgscncgpi1ltocsp100exx0/':
+
+            return 0
 
     def detail_parse(self, response):
         #汽车详情页面
         car_url = response.url
-        car_title = response.css('.car-title h2::text').extract()
+        car_name = response.css('.car-title h2::text').extract()
         car_details = response.css('.details ul li span').extract()
         car_address = response.css('.car-address::text').extract()
         car_basic = response.css('.infotext-list .grid-6::text').extract()
         car_describe = response.css('.businessmen-note .tip-content::text').extract()
         car_score = response.css('#kb_agvCount::text').extract()
-        car_pic = response.css('.grid-10 img::attr(src2)').extract()
+        car_img = response.css('.grid-10 img::attr(src2)').extract()
 
 
-        item = CarprojectItem(car_url = car_url,car_title=car_title,car_details=car_details,car_address=car_address,
-                              car_basic=car_basic,car_describe=car_describe,car_score=car_score,car_pic=car_pic)
+        item = CarprojectItem(car_url = car_url,car_name=car_name,car_details=car_details,car_address=car_address,
+                              car_basic=car_basic,car_describe=car_describe,car_score=car_score,car_img=car_img)
 
         yield item

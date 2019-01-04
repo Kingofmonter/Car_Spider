@@ -23,13 +23,14 @@ class CarspiderItem(scrapy.Item):
 class CarprojectItem(scrapy.Item):
 
     car_url = scrapy.Field()
-    car_title = scrapy.Field()
+    car_name = scrapy.Field()
     car_details = scrapy.Field()
     car_address = scrapy.Field()
     car_basic = scrapy.Field()
     car_describe = scrapy.Field()
     car_score = scrapy.Field()
-    car_pic = scrapy.Field()
+    car_img = scrapy.Field()
+    img_path = scrapy.Field()
 
 
 

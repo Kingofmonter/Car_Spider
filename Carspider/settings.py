@@ -67,8 +67,8 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   # 'Carspider.pipelines.CarspiderPipeline': 1,
-   # 'Carspider.pipelines.CarProjectPipeline':2
+   # 'Carspider.pipelines.CarspiderPipeline': 5,
+   'Carspider.pipelines.CarProjectPipeline':2,
    'Carspider.pipelines.CarImgPipeline':1
 }
 
